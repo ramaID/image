@@ -11,11 +11,11 @@ on:
     - cron: "0 8 * * 1"
 
 jobs:
-  base:
+  laravel:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
       upstream-channel-prefix: "beta-"
       tag-prefix: "beta-"
-      php-variation: base
+      php-variation: laravel
       checkout-type: branch
     secrets: inherit
