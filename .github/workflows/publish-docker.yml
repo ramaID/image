@@ -1,0 +1,18 @@
+name: Docker Publish (Production Images)
+
+on:
+  workflow_dispatch:
+  release:
+    types: [released]
+  schedule:
+    - cron: "0 8 * * 2"
+
+jobs:
+  laravel:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: ""
+      tag-prefix: ""
+      php-variation: laravel
+      checkout-type: latest-stable
+    secrets: inherit
