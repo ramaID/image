@@ -1,0 +1,21 @@
+name: Docker Publish (Beta Images)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - src/**
+  schedule:
+    - cron: "0 8 * * 1"
+
+jobs:
+  base:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: "beta-"
+      tag-prefix: "beta-"
+      php-variation: base
+      checkout-type: branch
+    secrets: inherit
