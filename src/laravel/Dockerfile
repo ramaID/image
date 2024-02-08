@@ -24,9 +24,8 @@ COPY composer-global-require /usr/bin/composer-global-require
 RUN chmod +x /usr/bin/composer-global-require
 RUN composer-global-require laravel/installer
 
-RUN export PATH="/composer/vendor/bin:$PATH"
-
 COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
 COPY .bash_aliases /root/.bash_aliases
+COPY .bashrc /root/.bashrc
 
 RUN composer global require laravel/installer
