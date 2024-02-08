@@ -18,4 +18,4 @@ RUN docker-php-serversideup-set-id www-data ${USER_ID} ${GROUP_ID}
 RUN install-php-extensions opcache imagick mongodb openswoole
 
 FROM base AS deploy
-COPY --chown=www-data:www-data . /var/www/html
+COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
