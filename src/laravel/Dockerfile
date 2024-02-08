@@ -18,4 +18,15 @@ RUN docker-php-serversideup-set-id www-data ${USER_ID} ${GROUP_ID}
 RUN install-php-extensions opcache imagick mongodb openswoole
 
 FROM base AS deploy
+
+COPY composer-global-require /usr/bin/composer-global-require
+
+RUN chmod +x /usr/bin/composer-global-require
+RUN composer-global-require laravel/installer
+
+RUN export PATH="/composer/vendor/bin:$PATH"
+
 COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
+COPY .bash_aliases /root/.bash_aliases
+
+RUN composer global require laravel/installer
