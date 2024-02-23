@@ -13,7 +13,7 @@ FROM base AS development
 # user to the same user and group that is running docker.
 ARG USER_ID
 ARG GROUP_ID
-RUN docker-php-serversideup-set-id www-data ${USER_ID} ${GROUP_ID}
+RUN docker-php-serversideup-set-id webuser ${USER_ID} ${GROUP_ID}
 
 RUN install-php-extensions opcache imagick mongodb openswoole
 
