@@ -9,7 +9,7 @@ LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
 FROM base AS development
 
-RUN install-php-extensions opcache imagick mongodb openswoole
+RUN install-php-extensions opcache mongodb openswoole
 
 FROM development AS deploy
 
