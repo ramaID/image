@@ -18,4 +18,4 @@ COPY .bashrc /root/.bashrc
 
 RUN composer global require laravel/installer
 
-RUN install-php-extensions opcache openswoole
+RUN install-php-extensions opcache
