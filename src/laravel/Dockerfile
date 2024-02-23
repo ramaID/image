@@ -17,7 +17,7 @@ RUN docker-php-serversideup-set-id www-data ${USER_ID} ${GROUP_ID}
 
 RUN install-php-extensions opcache imagick mongodb openswoole
 
-FROM base AS deploy
+FROM development AS deploy
 
 COPY composer-global-require /usr/bin/composer-global-require
 
