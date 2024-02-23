@@ -7,7 +7,7 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
-RUN install-php-extensions opcache mongodb openswoole
+# RUN install-php-extensions opcache mongodb openswoole
 
 COPY composer-global-require /usr/bin/composer-global-require
 
