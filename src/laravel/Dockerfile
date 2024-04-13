@@ -22,9 +22,10 @@ RUN install-php-extensions openswoole
 
 # Install PHP Imagemagick using regular Ubuntu commands
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends git libmagickwand-dev ghostscript \
-    && pecl install imagick \
-    && docker-php-ext-enable imagick \
+    && apt-get install -y --no-install-recommends git \
+    # && apt-get install -y --no-install-recommends libmagickwand-dev ghostscript \
+    # && pecl install imagick \
+    # && docker-php-ext-enable imagick \
+	# && apt-get purge -y libmagickwand-dev \
     && apt-get clean \
-	&& apt-get purge -y libmagickwand-dev \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
