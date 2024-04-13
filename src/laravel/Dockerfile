@@ -18,5 +18,10 @@ COPY .bashrc /root/.bashrc
 
 RUN composer global require laravel/installer
 
-RUN install-php-extensions opcache
-RUN install-php-extensions openswoole
+RUN install-php-extensions openswoole imagick
+
+# Install PHP Imagemagick using regular Ubuntu commands
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
