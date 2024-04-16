@@ -19,3 +19,11 @@ jobs:
       php-variation: laravel
       checkout-type: branch
     secrets: inherit
+  laravel-sonar:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: "beta-"
+      tag-prefix: "beta-"
+      php-variation: laravel-sonar
+      checkout-type: branch
+    secrets: inherit
