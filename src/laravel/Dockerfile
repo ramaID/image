@@ -3,6 +3,8 @@
 
 FROM serversideup/php:beta-8.3-unit AS base
 
+ENV PHP_OPCACHE_ENABLE=1
+
 COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
@@ -23,9 +25,5 @@ RUN install-php-extensions openswoole
 # Install PHP Imagemagick using regular Ubuntu commands
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git \
-    # && apt-get install -y --no-install-recommends libmagickwand-dev ghostscript \
-    # && pecl install imagick \
-    # && docker-php-ext-enable imagick \
-	# && apt-get purge -y libmagickwand-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
