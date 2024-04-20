@@ -1,5 +1,5 @@
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="serversideup/php:beta-${PHP_VERSION}-unit"
+ARG BASE_IMAGE="serversideup/php-dev:311-${PHP_VERSION}-unit"
 
 # Learn more about the Server Side Up PHP Docker Images at:
 # https://serversideup.net/open-source/docker-php/
