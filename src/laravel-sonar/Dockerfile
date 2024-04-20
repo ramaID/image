@@ -12,12 +12,14 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
+RUN install-php-extensions openswoole xdebug
+
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends git sudo
+    && apt-get install -y --no-install-recommends git
 
 COPY composer-global-require /usr/bin/composer-global-require
 
-RUN sudo chmod +x /usr/bin/composer-global-require
+RUN chmod +x /usr/bin/composer-global-require
 RUN composer-global-require laravel/installer
 
 COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
@@ -25,8 +27,6 @@ COPY .bash_aliases /root/.bash_aliases
 COPY .bashrc /root/.bashrc
 
 RUN composer global require laravel/installer
-
-RUN install-php-extensions openswoole xdebug
 
 RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
     && unzip /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip -d /opt \
