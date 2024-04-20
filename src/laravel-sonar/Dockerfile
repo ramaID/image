@@ -12,6 +12,10 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
+# Install PHP Imagemagick using regular Ubuntu commands
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git sudo
+
 COPY composer-global-require /usr/bin/composer-global-require
 
 RUN sudo chmod +x /usr/bin/composer-global-require
@@ -25,10 +29,7 @@ RUN composer global require laravel/installer
 
 RUN install-php-extensions openswoole xdebug
 
-# Install PHP Imagemagick using regular Ubuntu commands
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git \
-    && curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
+RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
     && unzip /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip -d /opt \
     && ln -s /opt/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner /usr/bin/sonar-scanner \
     && apt-get clean \

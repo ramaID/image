@@ -12,6 +12,12 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
+RUN install-php-extensions openswoole
+
+# Install PHP Imagemagick using regular Ubuntu commands
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git sudo
+
 COPY composer-global-require /usr/bin/composer-global-require
 
 RUN sudo chmod +x /usr/bin/composer-global-require
@@ -23,10 +29,5 @@ COPY .bashrc /root/.bashrc
 
 RUN composer global require laravel/installer
 
-RUN install-php-extensions openswoole
-
-# Install PHP Imagemagick using regular Ubuntu commands
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git \
-    && apt-get clean \
+RUN apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
