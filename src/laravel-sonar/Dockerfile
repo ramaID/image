@@ -1,5 +1,5 @@
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="serversideup/php-dev:311-${PHP_VERSION}-unit"
+ARG BASE_IMAGE="serversideup/php:beta-${PHP_VERSION}-unit-bookworm"
 
 # Learn more about the Server Side Up PHP Docker Images at:
 # https://serversideup.net/open-source/docker-php/
@@ -14,8 +14,8 @@ LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
 RUN install-php-extensions openswoole xdebug
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git
+RUN apt update \
+    && apt install -y --no-install-recommends git
 
 COPY composer-global-require /usr/bin/composer-global-require
 
@@ -31,5 +31,5 @@ RUN composer global require laravel/installer
 RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
     && unzip /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip -d /opt \
     && ln -s /opt/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner /usr/bin/sonar-scanner \
-    && apt-get clean \
+    && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
