@@ -1,5 +1,5 @@
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="serversideup/php-dev:311-${PHP_VERSION}-unit-bookworm"
+ARG BASE_IMAGE="serversideup/php:beta-${PHP_VERSION}-unit-bookworm"
 
 # Learn more about the Server Side Up PHP Docker Images at:
 # https://serversideup.net/open-source/docker-php/
@@ -12,7 +12,7 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
-# RUN install-php-extensions openswoole
+RUN install-php-extensions openswoole
 
 RUN apt update \
     && apt install -y --no-install-recommends git
