@@ -12,14 +12,14 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
-RUN install-php-extensions openswoole
+# RUN install-php-extensions openswoole
 
 RUN apt update \
-    && apt install -y --no-install-recommends git sudo
+    && apt install -y --no-install-recommends git
 
 COPY composer-global-require /usr/bin/composer-global-require
 
-RUN sudo chmod +x /usr/bin/composer-global-require
+RUN chmod +x /usr/bin/composer-global-require
 RUN composer-global-require laravel/installer
 
 COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
