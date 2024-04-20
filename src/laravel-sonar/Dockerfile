@@ -14,7 +14,7 @@ LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
 COPY composer-global-require /usr/bin/composer-global-require
 
-# RUN chmod +x /usr/bin/composer-global-require
+RUN sudo chmod +x /usr/bin/composer-global-require
 RUN composer-global-require laravel/installer
 
 COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
