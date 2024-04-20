@@ -12,7 +12,6 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
-# Install PHP Imagemagick using regular Ubuntu commands
 RUN apt-get update \
     && apt-get install -y --no-install-recommends git sudo
 

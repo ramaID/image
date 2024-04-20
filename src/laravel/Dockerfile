@@ -14,9 +14,8 @@ LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
 RUN install-php-extensions openswoole
 
-# Install PHP Imagemagick using regular Ubuntu commands
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git sudo
+RUN apt update \
+    && apt install -y --no-install-recommends git sudo
 
 COPY composer-global-require /usr/bin/composer-global-require
 
@@ -29,5 +28,5 @@ COPY .bashrc /root/.bashrc
 
 RUN composer global require laravel/installer
 
-RUN apt-get clean \
+RUN apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
