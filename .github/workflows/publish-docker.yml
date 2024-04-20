@@ -16,3 +16,11 @@ jobs:
       php-variation: laravel
       checkout-type: latest-stable
     secrets: inherit
+  laravel-sonar:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: ""
+      tag-prefix: ""
+      php-variation: laravel-sonar
+      checkout-type: latest-stable
+    secrets: inherit
