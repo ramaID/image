@@ -26,9 +26,9 @@ COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
 COPY .bash_aliases /root/.bash_aliases
 COPY .bashrc /root/.bashrc
 
-RUN composer global require laravel/installer isaac/composer-velocita
-
 RUN composer global config allow-plugins.isaac/composer-velocita true
+
+RUN composer global require laravel/installer isaac/composer-velocita
 
 RUN composer velocita:enable http://192.168.88.210:8999/
 
