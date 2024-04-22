@@ -12,7 +12,7 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
-RUN install-php-extensions openswoole
+RUN install-php-extensions openswoole mongodb
 
 RUN apt update \
     && apt install -y --no-install-recommends git
@@ -26,7 +26,11 @@ COPY --chmod=755 ./entrypoint.d/ /etc/entrypoint.d/
 COPY .bash_aliases /root/.bash_aliases
 COPY .bashrc /root/.bashrc
 
-RUN composer global require laravel/installer
+RUN composer global require laravel/installer isaac/composer-velocita
+
+RUN composer global config allow-plugins.isaac/composer-velocita true
+
+RUN composer velocita:enable http://192.168.88.210:8999/
 
 RUN apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
