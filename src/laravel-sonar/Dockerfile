@@ -14,7 +14,8 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
-RUN install-php-extensions openswoole xdebug
+RUN install-php-extensions openswoole mongodb gd exif bcmath
+RUN install-php-extensions xdebug
 
 RUN apt update \
     && apt install -y --no-install-recommends git
