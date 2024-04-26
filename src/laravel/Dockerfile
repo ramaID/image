@@ -21,12 +21,10 @@ RUN apt update \
 # Drop back to our unprivileged user
 USER www-data
 
-RUN composer-global-require laravel/installer
-
 COPY .bash_aliases /var/www/.bash_aliases
 COPY .bashrc /var/www/.bashrc
 
 RUN composer global config allow-plugins.isaac/composer-velocita true \
-    && composer global require laravel/installer isaac/composer-velocita
+    && composer-global-require laravel/installer isaac/composer-velocita
 
 # RUN composer velocita:enable http://192.168.88.210:8999/
