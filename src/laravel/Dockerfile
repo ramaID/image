@@ -11,8 +11,8 @@ USER root
 
 COPY composer-global-require /usr/bin/composer-global-require
 
-# RUN install-php-extensions openswoole mongodb gd exif bcmath \
-RUN apt update \
+RUN install-php-extensions openswoole mongodb gd exif bcmath \
+    apt update \
     && apt install -y --no-install-recommends git \
     && chmod +x /usr/bin/composer-global-require \
     && apt clean \
@@ -26,5 +26,3 @@ COPY .bashrc /var/www/.bashrc
 
 RUN composer global config allow-plugins.isaac/composer-velocita true \
     && composer-global-require laravel/installer isaac/composer-velocita
-
-# RUN composer velocita:enable http://192.168.88.210:8999/

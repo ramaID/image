@@ -1,36 +1,21 @@
 ARG PHP_VERSION='8.3'
 ARG BASE_IMAGE="serversideup/php:beta-${PHP_VERSION}-unit-bookworm"
 
-# Learn more about the Server Side Up PHP Docker Images at:
-# https://serversideup.net/open-source/docker-php/
-
 FROM ${BASE_IMAGE} AS base
+
+LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
 ENV PHP_OPCACHE_ENABLE=1
 
 USER root
 
-COPY .bash_aliases /root/.bash_aliases
-
-LABEL maintainer="Qisthi Ramadhani (@ramaID)"
-
-RUN install-php-extensions openswoole mongodb gd exif bcmath
-RUN install-php-extensions xdebug
-
-RUN apt update \
-    && apt install -y --no-install-recommends git
-
 COPY composer-global-require /usr/bin/composer-global-require
 
-RUN chmod +x /usr/bin/composer-global-require
-RUN composer-global-require laravel/installer
-
-COPY .bash_aliases /root/.bash_aliases
-COPY .bashrc /root/.bashrc
-
-RUN composer global require laravel/installer
-
-RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
+RUN install-php-extensions xdebug openswoole mongodb gd exif bcmath \
+    apt update \
+    && apt install -y --no-install-recommends git \
+    && chmod +x /usr/bin/composer-global-require \
+    && curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
     && unzip /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip -d /opt \
     && ln -s /opt/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner /usr/bin/sonar-scanner \
     && apt clean \
@@ -38,3 +23,9 @@ RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-s
 
 # Drop back to our unprivileged user
 USER www-data
+
+COPY .bash_aliases /var/www/.bash_aliases
+COPY .bashrc /var/www/.bashrc
+
+RUN composer global config allow-plugins.isaac/composer-velocita true \
+    && composer-global-require laravel/installer isaac/composer-velocita
