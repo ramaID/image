@@ -12,11 +12,10 @@ USER root
 COPY composer-global-require /usr/bin/composer-global-require
 
 RUN install-php-extensions xdebug openswoole mongodb gd exif bcmath \
-    apt update \
+    && apt update \
     && apt install -y --no-install-recommends git \
-    && chmod +x /usr/bin/composer-global-require
-
-RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
+    && chmod +x /usr/bin/composer-global-require \
+    && curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
     && unzip /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip -d /opt \
     && ln -s /opt/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner /usr/bin/sonar-scanner
 
