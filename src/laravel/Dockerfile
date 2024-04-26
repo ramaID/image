@@ -11,13 +11,11 @@ COPY .bash_aliases /root/.bash_aliases
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
-# RUN install-php-extensions openswoole mongodb gd exif bcmath
-
 RUN apt update \
     && apt install -y --no-install-recommends git
 
-RUN install-php-extensions openswoole mongodb gd exif bcmath \
-    && apt update \
+# RUN install-php-extensions openswoole mongodb gd exif bcmath \
+RUN apt update \
     && apt install -y --no-install-recommends git \
     && chmod +x /usr/bin/composer-global-require \
     && apt clean \
