@@ -3,16 +3,11 @@ ARG BASE_IMAGE="serversideup/php:beta-${PHP_VERSION}-unit-bookworm"
 
 FROM ${BASE_IMAGE} AS base
 
+LABEL maintainer="Qisthi Ramadhani (@ramaID)"
+
 ENV PHP_OPCACHE_ENABLE=1
 
 USER root
-
-COPY .bash_aliases /root/.bash_aliases
-
-LABEL maintainer="Qisthi Ramadhani (@ramaID)"
-
-RUN apt update \
-    && apt install -y --no-install-recommends git
 
 # RUN install-php-extensions openswoole mongodb gd exif bcmath \
 RUN apt update \
