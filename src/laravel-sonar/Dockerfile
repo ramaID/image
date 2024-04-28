@@ -1,5 +1,5 @@
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="serversideup/php:beta-${PHP_VERSION}-unit-bookworm"
+ARG BASE_IMAGE="serversideup/php:beta-${PHP_VERSION}-fpm-nginx"
 
 FROM ${BASE_IMAGE} AS base
 
