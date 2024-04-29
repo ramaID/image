@@ -16,7 +16,8 @@ RUN install-php-extensions openswoole mongodb gd exif bcmath \
     && apt install -y --no-install-recommends git \
     && chmod +x /usr/bin/composer-global-require \
     && apt clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
+    && chown -R www-data:www-data /var/www
 
 # Drop back to our unprivileged user
 USER www-data
