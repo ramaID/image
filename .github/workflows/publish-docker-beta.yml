@@ -11,6 +11,14 @@ on:
     - cron: "0 8 * * 1"
 
 jobs:
+  cli-alpine:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: "beta-"
+      tag-prefix: "beta-"
+      php-variation: cli-alpine
+      checkout-type: branch
+    secrets: inherit
   laravel:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
