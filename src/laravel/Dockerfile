@@ -1,5 +1,5 @@
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="serversideup/php:beta-${PHP_VERSION}-fpm-nginx"
+ARG BASE_IMAGE="serversideup/php:${PHP_VERSION}-fpm-nginx"
 
 FROM ${BASE_IMAGE} AS base
 
@@ -26,4 +26,4 @@ COPY .bash_aliases /var/www/.bash_aliases
 COPY .bashrc /var/www/.bashrc
 
 RUN composer global config allow-plugins.isaac/composer-velocita true \
-    && composer-global-require laravel/installer isaac/composer-velocita
+    && composer-global-require isaac/composer-velocita
