@@ -25,5 +25,5 @@ USER www-data
 COPY .bash_aliases /var/www/.bash_aliases
 COPY .bashrc /var/www/.bashrc
 
-RUN composer global config allow-plugins.isaac/composer-velocita true \
-    && composer-global-require isaac/composer-velocita
+RUN composer global config allow-plugins.gmta/composer-velocita true \
+    && composer global require gmta/composer-velocita
