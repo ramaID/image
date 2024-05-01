@@ -21,5 +21,5 @@ RUN rm -rf /var/cache/apk/* && \
 # Drop back to our unprivileged user
 USER www-data
 
-RUN composer global config allow-plugins.isaac/composer-velocita true \
-    && composer global require isaac/composer-velocita
+RUN composer global config allow-plugins.gmta/composer-velocita true \
+    && composer global require gmta/composer-velocita
