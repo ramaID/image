@@ -14,6 +14,7 @@ COPY composer-global-require /usr/bin/composer-global-require
 RUN install-php-extensions openswoole mongodb gd exif bcmath \
     && apt update \
     && apt install -y --no-install-recommends git \
+    && curl -sSfL https://get.tur.so/install.sh | bash \
     && chmod +x /usr/bin/composer-global-require \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
