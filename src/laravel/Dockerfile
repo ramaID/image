@@ -11,7 +11,7 @@ USER root
 
 COPY composer-global-require /usr/bin/composer-global-require
 
-RUN install-php-extensions openswoole mongodb gd exif bcmath \
+RUN install-php-extensions openswoole mongodb gd exif bcmath imagick \
     && apt update \
     && apt install -y --no-install-recommends git \
     && curl -sSfL https://get.tur.so/install.sh | bash \
