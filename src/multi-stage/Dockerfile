@@ -11,7 +11,7 @@ FROM ${BASE_IMAGE} AS base
 
 # Switch to root before installing our PHP extensions
 USER root
-RUN install-php-extensions openswoole mongodb gd exif bcmath imagick intl
+RUN install-php-extensions openswoole mongodb gd exif bcmath imagick intl oci8
 
 RUN apt update \
     && apt install -y --no-install-recommends git \
