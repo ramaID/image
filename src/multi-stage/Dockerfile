@@ -14,7 +14,7 @@ USER root
 RUN install-php-extensions openswoole mongodb gd exif bcmath imagick intl
 
 RUN apt update \
-    && apt install -y --no-install-recommends git \
+    && apt install -y --no-install-recommends git wget \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
