@@ -7,7 +7,7 @@ LABEL maintainer="Qisthi Ramadhani (@ramaID)"
 
 USER root
 
-RUN install-php-extensions openswoole mongodb gd exif bcmath imagick \
+RUN install-php-extensions openswoole mongodb gd exif bcmath \
     && apk update && apk add --no-cache git unzip bash \
     && curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip --output /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip \
     && unzip /tmp/sonar-scanner-cli-5.0.1.3006-linux.zip -d /opt \

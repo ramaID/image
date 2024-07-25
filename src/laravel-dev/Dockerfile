@@ -9,7 +9,7 @@ USER root
 
 COPY composer-global-require /usr/bin/composer-global-require
 
-RUN install-php-extensions xdebug openswoole mongodb gd exif bcmath imagick \
+RUN install-php-extensions xdebug openswoole mongodb gd exif bcmath \
     && apt update \
     && apt install -y --no-install-recommends git \
     && chmod +x /usr/bin/composer-global-require \
