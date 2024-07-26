@@ -14,50 +14,58 @@ USER root
 RUN install-php-extensions openswoole mongodb gd exif bcmath imagick intl
 
 RUN apt update \
-    && apt install -y --no-install-recommends git \
+    && apt install -y --no-install-recommends git unzip curl \
     && apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 COPY composer-global-require /usr/bin/composer-global-require
 RUN chmod +x /usr/bin/composer-global-require
 
+# Define Oracle Instant Client version
+ARG ORACLE_IC_VERSION='19.23.0.0.0dbru'
+ARG ORACLE_IC_BASE_URL='https://download.oracle.com/otn_software/linux/instantclient'
+
 # For linux/amd64
 RUN if [ "$(uname -m)" = "x86_64" ]; then \
-    curl -o /tmp/instantclient.zip https://download.oracle.com/otn_software/linux/instantclient/1924000/instantclient-basic-linux.x64-19.23.0.0.0dbru.zip && \
+    echo "Downloading Oracle Instant Client for amd64..." && \
+    curl -o /tmp/instantclient.zip ${ORACLE_IC_BASE_URL}/1924000/instantclient-basic-linux.x64-${ORACLE_IC_VERSION}.zip && \
     unzip -oq /tmp/instantclient.zip -d /usr/lib/oracle && \
     rm /tmp/instantclient.zip && \
-    curl -o /tmp/instantclient-sdk.zip https://download.oracle.com/otn_software/linux/instantclient/1924000/instantclient-sdk-linux.x64-19.23.0.0.0dbru.zip && \
+    curl -o /tmp/instantclient-sdk.zip ${ORACLE_IC_BASE_URL}/1924000/instantclient-sdk-linux.x64-${ORACLE_IC_VERSION}.zip && \
     unzip -oq /tmp/instantclient-sdk.zip -d /usr/lib/oracle && \
     rm /tmp/instantclient-sdk.zip && \
+    echo "Moving Instant Client directory..." && \
     mv /usr/lib/oracle/instantclient_19_24 /usr/lib/oracle/instantclient_19_23; \
 fi
 
 # For linux/arm64/v8
 RUN if [ "$(uname -m)" = "aarch64" ]; then \
-    curl -o /tmp/instantclient.zip https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-basic-linux.arm64-19.23.0.0.0dbru.zip && \
+    echo "Downloading Oracle Instant Client for arm64..." && \
+    curl -o /tmp/instantclient.zip ${ORACLE_IC_BASE_URL}/1923000/instantclient-basic-linux.arm64-${ORACLE_IC_VERSION}.zip && \
     unzip -oq /tmp/instantclient.zip -d /usr/lib/oracle && \
     rm /tmp/instantclient.zip && \
-    curl -o /tmp/instantclient-sdk.zip https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-sdk-linux.arm64-19.23.0.0.0dbru.zip && \
+    curl -o /tmp/instantclient-sdk.zip ${ORACLE_IC_BASE_URL}/1923000/instantclient-sdk-linux.arm64-${ORACLE_IC_VERSION}.zip && \
     unzip -oq /tmp/instantclient-sdk.zip -d /usr/lib/oracle && \
     rm /tmp/instantclient-sdk.zip; \
 fi
 
 # For linux/arm/v7
 RUN if [ "$(uname -m)" = "armv7l" ]; then \
-    curl -o /tmp/instantclient.zip https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-basic-linux-19.23.0.0.0dbru.zip && \
+    echo "Downloading Oracle Instant Client for arm/v7..." && \
+    curl -o /tmp/instantclient.zip ${ORACLE_IC_BASE_URL}/1923000/instantclient-basic-linux-${ORACLE_IC_VERSION}.zip && \
     unzip -oq /tmp/instantclient.zip -d /usr/lib/oracle && \
     rm /tmp/instantclient.zip && \
-    curl -o /tmp/instantclient-sdk.zip https://download.oracle.com/otn_software/linux/instantclient/1923000/instantclient-sdk-linux-19.23.0.0.0dbru.zip && \
+    curl -o /tmp/instantclient-sdk.zip ${ORACLE_IC_BASE_URL}/1923000/instantclient-sdk-linux-${ORACLE_IC_VERSION}.zip && \
     unzip -oq /tmp/instantclient-sdk.zip -d /usr/lib/oracle && \
     rm /tmp/instantclient-sdk.zip; \
 fi
 
-RUN echo /usr/lib/oracle/instantclient_19_23 > /etc/ld.so.conf.d/oracle-instantclient.conf && \
+RUN echo /usr/lib/oracle/instantclient > /etc/ld.so.conf.d/oracle-instantclient.conf && \
     ldconfig
 
-ENV LD_LIBRARY_PATH /usr/lib/oracle/instantclient_19_23
+ENV LD_LIBRARY_PATH /usr/lib/oracle/instantclient
 
-RUN docker-php-ext-configure oci8 --with-oci8=instantclient,/usr/lib/oracle/instantclient_19_23 \
+RUN docker-php-ext-configure oci8 --with-oci8=instantclient,/usr/lib/oracle/instantclient \
     && docker-php-ext-install -j$(nproc) oci8
 
 ############################################
