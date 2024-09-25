@@ -32,6 +32,14 @@ jobs:
       php-variation: laravel-dev
       checkout-type: latest-stable
     secrets: inherit
+  smart:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: ""
+      tag-prefix: ""
+      php-variation: smart
+      checkout-type: latest-stable
+    secrets: inherit
   multi-stage:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
