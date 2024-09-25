@@ -27,3 +27,11 @@ jobs:
       php-variation: laravel-dev
       checkout-type: branch
     secrets: inherit
+  smart:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: "beta-"
+      tag-prefix: "beta-"
+      php-variation: smart
+      checkout-type: branch
+    secrets: inherit
