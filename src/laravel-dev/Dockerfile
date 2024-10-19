@@ -1,5 +1,5 @@
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="serversideup/php:${PHP_VERSION}-unit"
+ARG BASE_IMAGE="serversideup/php:${PHP_VERSION}-fpm-nginx"
 
 FROM ${BASE_IMAGE} AS base
 

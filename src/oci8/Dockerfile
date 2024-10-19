@@ -1,5 +1,5 @@
 ARG PHP_VERSION='8.2'
-ARG BASE_IMAGE="ramageek/image:php${PHP_VERSION}-multi-stage-v1.2.3"
+ARG BASE_IMAGE="ramageek/image:php${PHP_VERSION}-multi-stage"
 
 FROM ${BASE_IMAGE} AS base
 
