@@ -1,9 +1,11 @@
 ARG PHP_VERSION='8.2'
-ARG BASE_IMAGE="ramageek/image:php${PHP_VERSION}-multi-stage"
+ARG BASE_IMAGE="ramageek/image:beta-php${PHP_VERSION}-smart"
 
 FROM ${BASE_IMAGE} AS base
 
 USER root
+
+RUN install-php-extensions openswoole mongodb
 
 # Define Oracle Instant Client version
 ARG ORACLE_IC_VERSION='19.23.0.0.0dbru'
