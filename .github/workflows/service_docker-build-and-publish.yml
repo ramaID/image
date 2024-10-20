@@ -94,6 +94,8 @@ jobs:
           platforms: |
             linux/amd64
             linux/arm64/v8
+            linux/386
+            linux/s390x
           pull: true
           push: true
           tags: ${{ env.DOCKER_TAGS }}
