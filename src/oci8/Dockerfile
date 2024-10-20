@@ -58,6 +58,11 @@ RUN if [ "$(uname -m)" = "s390x" ]; then \
     rm /tmp/instantclient-sdk.zip; \
 fi
 
+# For Linux ARM (armv7)
+RUN if [ "$(uname -m)" = "armv7l" ]; then \
+    echo "Oracle Instant Client is not supported for ARMv7 architecture."; \
+fi
+
 RUN echo /usr/lib/oracle/instantclient > /etc/ld.so.conf.d/oracle-instantclient.conf && \
     ldconfig && \
     apt-get update && apt-get install -y \
