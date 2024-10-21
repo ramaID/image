@@ -17,10 +17,11 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-export PATH="/composer/vendor/bin:$PATH"
-
 if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 else
     print "404: ~/.bash_aliases not found."
 fi
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:/composer/vendor/bin:$PATH"

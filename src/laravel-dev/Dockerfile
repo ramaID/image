@@ -18,17 +18,15 @@ RUN install-php-extensions xdebug openswoole mongodb gd exif bcmath \
     && ln -s /opt/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner /usr/bin/sonar-scanner \
     && chown -R www-data:www-data /var/www
 
-# Bun binary installation
-RUN curl -fsSL https://bun.sh/install | bash
-
 RUN apt clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
 # Drop back to our unprivileged user
 USER www-data
 
+RUN composer global config allow-plugins.gmta/composer-velocita true \
+    && composer global require gmta/composer-velocita \
+    && curl -fsSL https://bun.sh/install | bash
+
 COPY .bash_aliases /var/www/.bash_aliases
 COPY .bashrc /var/www/.bashrc
-
-RUN composer global config allow-plugins.gmta/composer-velocita true \
-    && composer global require gmta/composer-velocita
