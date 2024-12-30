@@ -8,43 +8,19 @@ on:
     - cron: "0 8 * * 2" # Every Tuesday at 8:00 AM UTC
 
 jobs:
-  cli-alpine:
+  fullstack-cli:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
       upstream-channel-prefix: ""
       tag-prefix: ""
-      php-variation: cli-alpine
+      php-variation: fullstack-cli
       checkout-type: latest-stable
     secrets: inherit
-  laravel:
+  fullstack-fpm:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
       upstream-channel-prefix: ""
       tag-prefix: ""
-      php-variation: laravel
+      php-variation: fullstack-fpm
       checkout-type: latest-stable
     secrets: inherit
-  laravel-dev:
-    uses: ./.github/workflows/service_docker-build-and-publish.yml
-    with:
-      upstream-channel-prefix: ""
-      tag-prefix: ""
-      php-variation: laravel-dev
-      checkout-type: latest-stable
-    secrets: inherit
-  smart:
-    uses: ./.github/workflows/service_docker-build-and-publish.yml
-    with:
-      upstream-channel-prefix: ""
-      tag-prefix: ""
-      php-variation: smart
-      checkout-type: latest-stable
-    secrets: inherit
-  # oci8:
-  #   uses: ./.github/workflows/service_docker-build-and-publish.yml
-  #   with:
-  #     upstream-channel-prefix: ""
-  #     tag-prefix: ""
-  #     php-variation: oci8
-  #     checkout-type: latest-stable
-  #   secrets: inherit

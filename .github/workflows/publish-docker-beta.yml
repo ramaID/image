@@ -11,14 +11,6 @@ on:
     - cron: "0 8 * * 1" # Every Monday at 8:00 AM UTC
 
 jobs:
-  cli-alpine:
-    uses: ./.github/workflows/service_docker-build-and-publish.yml
-    with:
-      upstream-channel-prefix: "beta-"
-      tag-prefix: "beta-"
-      php-variation: cli-alpine
-      checkout-type: branch
-    secrets: inherit
   fullstack-cli:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
@@ -33,29 +25,5 @@ jobs:
       upstream-channel-prefix: "beta-"
       tag-prefix: "beta-"
       php-variation: fullstack-fpm
-      checkout-type: branch
-    secrets: inherit
-  laravel:
-    uses: ./.github/workflows/service_docker-build-and-publish.yml
-    with:
-      upstream-channel-prefix: "beta-"
-      tag-prefix: "beta-"
-      php-variation: laravel
-      checkout-type: branch
-    secrets: inherit
-  laravel-dev:
-    uses: ./.github/workflows/service_docker-build-and-publish.yml
-    with:
-      upstream-channel-prefix: "beta-"
-      tag-prefix: "beta-"
-      php-variation: laravel-dev
-      checkout-type: branch
-    secrets: inherit
-  smart:
-    uses: ./.github/workflows/service_docker-build-and-publish.yml
-    with:
-      upstream-channel-prefix: "beta-"
-      tag-prefix: "beta-"
-      php-variation: smart
       checkout-type: branch
     secrets: inherit
