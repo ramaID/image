@@ -19,6 +19,14 @@ jobs:
       php-variation: cli-alpine
       checkout-type: branch
     secrets: inherit
+  fullstack:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: "beta-"
+      tag-prefix: "beta-"
+      php-variation: fullstack
+      checkout-type: branch
+    secrets: inherit
   laravel:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
