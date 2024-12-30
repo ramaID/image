@@ -4,6 +4,8 @@ ARG BASE_IMAGE="serversideup/php:${PHP_VERSION}-cli-alpine"
 
 FROM node:${NODE_VERSION}-alpine AS node
 
+FROM oven/bun:alpine AS bun
+
 FROM ${BASE_IMAGE}
 
 LABEL maintainer="Qisthi Ramadhani (@ramaID)"
@@ -34,12 +36,7 @@ RUN if [[ $(uname -m) == "aarch64" ]] ; \
     fi
 
 # Install bun
-RUN npm install -g bun@latest
-RUN if [[ ! $(uname -m) == "aarch64" ]] ; \
-    then \
-    rm /usr/local/bin/bun ; \
-    ln -s /usr/local/lib/node_modules/bun/node_modules/@oven/bun-linux-x64-baseline/bin/bun /usr/local/bin/bun ; \
-    fi
+COPY --from=bun /usr/local/bin /usr/local/bin
 
 RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip --output /tmp/sonar-scanner.zip \
     && unzip /tmp/sonar-scanner.zip -d /opt \

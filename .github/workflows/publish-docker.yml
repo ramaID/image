@@ -5,7 +5,7 @@ on:
   release:
     types: [released]
   schedule:
-    - cron: "0 8 * * 2"
+    - cron: "0 8 * * 2" # Every Tuesday at 8:00 AM UTC
 
 jobs:
   cli-alpine:

@@ -8,7 +8,7 @@ on:
     paths:
       - src/**
   schedule:
-    - cron: "0 8 * * 1"
+    - cron: "0 8 * * 1" # Every Monday at 8:00 AM UTC
 
 jobs:
   cli-alpine:
@@ -19,12 +19,12 @@ jobs:
       php-variation: cli-alpine
       checkout-type: branch
     secrets: inherit
-  fullstack:
+  fullstack-cli:
     uses: ./.github/workflows/service_docker-build-and-publish.yml
     with:
       upstream-channel-prefix: "beta-"
       tag-prefix: "beta-"
-      php-variation: fullstack
+      php-variation: fullstack-cli
       checkout-type: branch
     secrets: inherit
   laravel:
