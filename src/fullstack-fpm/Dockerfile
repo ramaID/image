@@ -1,6 +1,6 @@
 ARG NODE_VERSION='18.20.5'
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="serversideup/php:${PHP_VERSION}-cli-alpine"
+ARG BASE_IMAGE="serversideup/php:${PHP_VERSION}-fpm-alpine"
 
 FROM node:${NODE_VERSION}-alpine AS node
 
