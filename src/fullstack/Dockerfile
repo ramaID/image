@@ -38,9 +38,9 @@ RUN if [[ ! $(uname -m) == "aarch64" ]] ; \
     ln -s /usr/local/lib/node_modules/bun/node_modules/@oven/bun-linux-x64-baseline/bin/bun /usr/local/bin/bun ; \
     fi
 
-RUN install-php-extensions openswoole mongodb gd exif bcmath \
-    && apk update && apk add --no-cache git unzip bash \
-    && curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip --output /tmp/sonar-scanner.zip \
+RUN install-php-extensions openswoole mongodb gd exif bcmath
+RUN apk update && apk add --no-cache git unzip bash
+RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip --output /tmp/sonar-scanner.zip \
     && unzip /tmp/sonar-scanner.zip -d /opt \
     && ln -s /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner /usr/bin/sonar-scanner
 
