@@ -20,6 +20,7 @@ COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
+COPY --from=node /opt/yarn-v1.22.22 /opt/yarn-v1.22.22
 
 # Install glibc to run bun
 RUN if [[ $(uname -m) == "aarch64" ]] ; \
@@ -40,7 +41,7 @@ COPY --from=bun /usr/local/bin /usr/local/bin
 
 RUN curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip --output /tmp/sonar-scanner.zip \
     && unzip /tmp/sonar-scanner.zip -d /opt \
-    && ln -s /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner /usr/bin/sonar-scanner
+    && ln -s /opt/sonar-scanner-6.2.1.4610-linux-x64/bin/sonar-scanner /usr/local/bin/sonar-scanner
 
 # Clean up
 RUN rm -rf /var/cache/apk/* && \
@@ -51,3 +52,11 @@ USER www-data
 
 RUN composer global config allow-plugins.gmta/composer-velocita true \
     && composer global require gmta/composer-velocita
+
+# Copy shell aliases to both root and www-data user homes
+COPY shell/aliases.sh /root/.aliases.sh
+COPY shell/aliases.sh /var/www/.aliases.sh
+
+# Copy shell configuration
+COPY shell/bashrc /root/.sh
+COPY shell/bashrc /var/www/.bashrc
