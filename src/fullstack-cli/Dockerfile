@@ -43,12 +43,12 @@ COPY --from=bun /usr/local/bin /usr/local/bin
 RUN if [[ $(uname -m) == "aarch64" ]] ; \
     then \
     # aarch64
-    curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-aarch64.zip --output /tmp/sonar-scanner.zip \
-    && SONAR_DIR="sonar-scanner-6.2.1.4610-linux-aarch64" \
+    curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-aarch64.zip --output /tmp/sonar-scanner.zip ; \
+    SONAR_DIR="sonar-scanner-6.2.1.4610-linux-aarch64" \
     else \
     # x86_64
-    curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip --output /tmp/sonar-scanner.zip \
-    && SONAR_DIR="sonar-scanner-6.2.1.4610-linux-x64" \
+    curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip --output /tmp/sonar-scanner.zip ; \
+    SONAR_DIR="sonar-scanner-6.2.1.4610-linux-x64" \
     fi \
     && unzip /tmp/sonar-scanner.zip -d /opt \
     && ln -s /opt/${SONAR_DIR}/bin/sonar-scanner /usr/local/bin/sonar-scanner \
