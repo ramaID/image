@@ -12,4 +12,4 @@ docker build -t php-oci8 --build-arg PHP_VERSION=8.1 -f src/oci8/Dockerfile .
 
 ### Compiled Image
 
-Check the compiled image on Docker Hub: [https://hub.docker.com/r/ramageek/image](https://hub.docker.com/r/ramageek/image)
+Check the compiled image on Docker Hub: [https://hub.docker.com/r/ramaid/image](https://hub.docker.com/r/ramaid/image)
