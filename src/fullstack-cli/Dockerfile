@@ -62,7 +62,8 @@ RUN rm -rf /var/cache/apk/* && \
 USER www-data
 
 RUN composer global config allow-plugins.gmta/composer-velocita true \
-    && composer global require gmta/composer-velocita
+    && composer global require gmta/composer-velocita \
+    && git config --global --add safe.directory /builds
 
 # Copy shell aliases to both root and www-data user homes
 COPY shell/aliases.sh /root/.aliases.sh
