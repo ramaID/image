@@ -10,6 +10,8 @@ FROM ${BASE_IMAGE}
 
 LABEL maintainer="Qisthi Ramadhani (https://qisthi.dev)"
 
+ENV PHP_OPCACHE_ENABLE=1
+
 USER root
 
 RUN install-php-extensions openswoole mongodb gd exif bcmath xdebug \
