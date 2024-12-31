@@ -12,7 +12,7 @@ LABEL maintainer="Qisthi Ramadhani (https://qisthi.dev)"
 
 USER root
 
-RUN install-php-extensions openswoole mongodb gd exif bcmath \
+RUN install-php-extensions openswoole mongodb gd exif bcmath xdebug \
     && apk update && apk add --no-cache git unzip bash
 
 # Install node and npm
