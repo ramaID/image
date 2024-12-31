@@ -78,11 +78,11 @@ jobs:
 
       - name: "👨‍🔬 Set docker tags: Non-Release "
         if: inputs.checkout-type == 'branch'
-        run: echo "DOCKER_TAGS=ramageek/image:${{ inputs.tag-prefix}}php${{ matrix.php-version }}-${{ inputs.php-variation }}" >> $GITHUB_ENV
+        run: echo "DOCKER_TAGS=ramaid/image:${{ inputs.tag-prefix}}php${{ matrix.php-version }}-${{ inputs.php-variation }}" >> $GITHUB_ENV
 
       - name: "🚀 Set docker tags: Release"
         if: inputs.checkout-type == 'latest-stable'
-        run: echo "DOCKER_TAGS=ramageek/image:${{ inputs.tag-prefix}}php${{ matrix.php-version }}-${{ inputs.php-variation }}, ramageek/image:${{ inputs.tag-prefix}}php${{ matrix.php-version }}-${{ inputs.php-variation }}-${{ steps.latest-stable-version.outputs.LATEST_STABLE_VERSION }}" >> $GITHUB_ENV
+        run: echo "DOCKER_TAGS=ramaid/image:${{ inputs.tag-prefix}}php${{ matrix.php-version }}-${{ inputs.php-variation }}, ramaid/image:${{ inputs.tag-prefix}}php${{ matrix.php-version }}-${{ inputs.php-variation }}-${{ steps.latest-stable-version.outputs.LATEST_STABLE_VERSION }}" >> $GITHUB_ENV
 
       - name: Build and push
         uses: docker/build-push-action@v3
