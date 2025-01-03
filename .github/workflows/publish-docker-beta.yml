@@ -35,3 +35,11 @@ jobs:
       php-variation: fullstack-http
       checkout-type: branch
     secrets: inherit
+  franken:
+    uses: ./.github/workflows/service_docker-build-and-publish-franken.yml
+    with:
+      upstream-channel-prefix: "beta-"
+      tag-prefix: "beta-"
+      php-variation: franken
+      checkout-type: branch
+    secrets: inherit
