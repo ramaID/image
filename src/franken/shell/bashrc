@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Set LS color options
+export LS_OPTIONS='--color=auto'
+
+# Define common aliases
+alias ls='ls $LS_OPTIONS'
+alias ll='ls $LS_OPTIONS -l'
+alias l='ls $LS_OPTIONS -lA'
+
+# Safety aliases
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Source aliases file if it exists
+if [ -f ~/.aliases.sh ]; then
+    source ~/.aliases.sh
+else
+    echo "404: ~/.aliases.sh not found."
+fi
