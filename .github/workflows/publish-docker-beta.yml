@@ -27,3 +27,11 @@ jobs:
       php-variation: fullstack-fpm
       checkout-type: branch
     secrets: inherit
+  fullstack-http:
+    uses: ./.github/workflows/service_docker-build-and-publish.yml
+    with:
+      upstream-channel-prefix: "beta-"
+      tag-prefix: "beta-"
+      php-variation: fullstack-http
+      checkout-type: branch
+    secrets: inherit
