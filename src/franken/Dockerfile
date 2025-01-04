@@ -1,7 +1,7 @@
 ARG NODE_VERSION='18.20.5'
 # only support PHP > 8.2
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="1.3.6-php${PHP_VERSION}-alpine"
+ARG BASE_IMAGE="dunglas/frankenphp:1.3.6-php${PHP_VERSION}-alpine"
 
 FROM node:${NODE_VERSION}-alpine AS node
 
@@ -13,7 +13,8 @@ LABEL maintainer="Qisthi Ramadhani (https://qisthi.dev)"
 
 ENV SERVER_NAME="http://"
 
-RUN install-php-extensions gd pcntl opcache pdo pdo_mysql pdo_pgsql mongodb redis
+RUN apk update && apk add --no-cache git unzip bash \
+    && install-php-extensions gd pcntl opcache pdo pdo_mysql pdo_pgsql mongodb redis zip
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -41,21 +42,6 @@ RUN if [[ $(uname -m) == "aarch64" ]] ; \
 # Install bun
 COPY --from=bun /usr/local/bin /usr/local/bin
 
-# Install sonar-scanner
-RUN if [[ $(uname -m) == "aarch64" ]] ; \
-    then \
-        # aarch64
-        curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-aarch64.zip --output /tmp/sonar-scanner.zip && \
-        export SONAR_DIR="sonar-scanner-6.2.1.4610-linux-aarch64" ; \
-    else \
-        # x86_64
-        curl https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip --output /tmp/sonar-scanner.zip && \
-        export SONAR_DIR="sonar-scanner-6.2.1.4610-linux-x64" ; \
-    fi && \
-    unzip /tmp/sonar-scanner.zip -d /opt && \
-    ln -s /opt/${SONAR_DIR}/bin/sonar-scanner /usr/local/bin/sonar-scanner && \
-    rm /tmp/sonar-scanner.zip
-
 # Clean up
 RUN rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* /var/tmp/*
@@ -63,8 +49,7 @@ RUN rm -rf /var/cache/apk/* && \
 WORKDIR /var/www/html
 
 RUN composer global config allow-plugins.gmta/composer-velocita true \
-    && composer global require gmta/composer-velocita \
-    && git config --global --add safe.directory /builds
+    && composer global require gmta/composer-velocita
 
 COPY shell/aliases.sh /var/www/.aliases.sh
 COPY shell/bashrc /var/www/.bashrc
