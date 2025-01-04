@@ -13,8 +13,9 @@ LABEL maintainer="Qisthi Ramadhani (https://qisthi.dev)"
 
 ENV SERVER_NAME="http://"
 
-RUN apk update && apk add --no-cache git unzip bash \
-    && install-php-extensions gd pcntl opcache pdo pdo_mysql pdo_pgsql mongodb redis zip
+RUN apk update && \
+    apk add --no-cache git unzip bash && \
+    install-php-extensions gd pcntl opcache pdo pdo_mysql pdo_pgsql mongodb redis zip
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -48,8 +49,8 @@ RUN rm -rf /var/cache/apk/* && \
 
 WORKDIR /var/www/html
 
-RUN composer global config allow-plugins.gmta/composer-velocita true \
-    && composer global require gmta/composer-velocita
+RUN composer global config allow-plugins.gmta/composer-velocita true && \
+    composer global require gmta/composer-velocita
 
 COPY shell/aliases.sh /var/www/.aliases.sh
 COPY shell/bashrc /var/www/.bashrc

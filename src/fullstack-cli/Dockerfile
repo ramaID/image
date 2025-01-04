@@ -14,8 +14,9 @@ ENV PHP_OPCACHE_ENABLE=1
 
 USER root
 
-RUN install-php-extensions mongodb gd exif bcmath xdebug \
-    && apk update && apk add --no-cache git unzip bash
+RUN install-php-extensions mongodb gd exif bcmath xdebug && \
+    apk update && \
+    apk add --no-cache git unzip bash
 
 # Install node and npm
 COPY --from=node /usr/lib /usr/lib
@@ -63,9 +64,9 @@ RUN rm -rf /var/cache/apk/* && \
 # Drop back to our unprivileged user
 USER www-data
 
-RUN composer global config allow-plugins.gmta/composer-velocita true \
-    && composer global require gmta/composer-velocita \
-    && git config --global --add safe.directory /builds
+RUN composer global config allow-plugins.gmta/composer-velocita true && \
+    composer global require gmta/composer-velocita && \
+    git config --global --add safe.directory /builds
 
 # Copy shell aliases to both root and www-data user homes
 COPY shell/aliases.sh /root/.aliases.sh

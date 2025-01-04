@@ -14,8 +14,9 @@ ENV PHP_OPCACHE_ENABLE=1
 
 USER root
 
-RUN install-php-extensions mongodb gd exif bcmath \
-    && apk update && apk add --no-cache git unzip bash
+RUN install-php-extensions mongodb gd exif bcmath && \
+    apk update && \
+    apk add --no-cache git unzip bash
 
 # Install node and npm
 COPY --from=node /usr/lib /usr/lib
@@ -27,15 +28,15 @@ COPY --from=node /opt/yarn-v1.22.22 /opt/yarn-v1.22.22
 # Install glibc to run bun
 RUN if [[ $(uname -m) == "aarch64" ]] ; \
     then \
-    # aarch64
-    wget https://raw.githubusercontent.com/squishyu/alpine-pkg-glibc-aarch64-bin/master/glibc-2.26-r1.apk ; \
-    apk add --no-cache --allow-untrusted --force-overwrite glibc-2.26-r1.apk ; \
-    rm glibc-2.26-r1.apk ; \
+        # aarch64
+        wget https://raw.githubusercontent.com/squishyu/alpine-pkg-glibc-aarch64-bin/master/glibc-2.26-r1.apk ; \
+        apk add --no-cache --allow-untrusted --force-overwrite glibc-2.26-r1.apk ; \
+        rm glibc-2.26-r1.apk ; \
     else \
-    # x86_64
-    wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk ; \
-    apk add --no-cache --allow-untrusted --force-overwrite glibc-2.28-r0.apk ; \
-    rm glibc-2.28-r0.apk ; \
+        # x86_64
+        wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.28-r0/glibc-2.28-r0.apk ; \
+        apk add --no-cache --allow-untrusted --force-overwrite glibc-2.28-r0.apk ; \
+        rm glibc-2.28-r0.apk ; \
     fi
 
 # Install bun
@@ -63,9 +64,9 @@ RUN rm -rf /var/cache/apk/* && \
 # Drop back to our unprivileged user
 USER www-data
 
-RUN composer global config allow-plugins.gmta/composer-velocita true \
-    && composer global require gmta/composer-velocita \
-    && git config --global --add safe.directory /builds
+RUN composer global config allow-plugins.gmta/composer-velocita true && \
+    composer global require gmta/composer-velocita && \
+    git config --global --add safe.directory /builds
 
 # Copy shell aliases to both root and www-data user homes
 COPY shell/aliases.sh /root/.aliases.sh
