@@ -1,7 +1,7 @@
 ARG NODE_VERSION='18.20.5'
 # only support PHP > 8.2
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="dunglas/frankenphp:1.3.6-php${PHP_VERSION}-alpine"
+ARG BASE_IMAGE="dunglas/frankenphp:1.4.0-php${PHP_VERSION}-alpine"
 
 FROM node:${NODE_VERSION}-alpine AS node
 
@@ -52,11 +52,10 @@ WORKDIR /var/www/html
 RUN composer global config allow-plugins.gmta/composer-velocita true && \
     composer global require gmta/composer-velocita
 
-COPY shell/aliases.sh /var/www/.aliases.sh
-COPY shell/bashrc /var/www/.bashrc
+COPY shell/aliases.sh /root/.aliases.sh
+COPY shell/bashrc /root/.bashrc
 
 # Start with base PHP config, then add extensions.
 COPY php.ini /usr/local/etc/php/
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
