@@ -52,11 +52,10 @@ WORKDIR /var/www/html
 RUN composer global config allow-plugins.gmta/composer-velocita true && \
     composer global require gmta/composer-velocita
 
-COPY shell/aliases.sh /var/www/.aliases.sh
-COPY shell/bashrc /var/www/.bashrc
+COPY shell/aliases.sh /root/.aliases.sh
+COPY shell/bashrc /root/.bashrc
 
 # Start with base PHP config, then add extensions.
 COPY php.ini /usr/local/etc/php/
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80
