@@ -14,7 +14,7 @@ ENV PHP_OPCACHE_ENABLE=1
 
 USER root
 
-RUN install-php-extensions mongodb gd exif bcmath xdebug && \
+RUN install-php-extensions gd exif bcmath xdebug && \
     apk update && \
     apk add --no-cache git unzip bash
 
