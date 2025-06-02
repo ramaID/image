@@ -1,4 +1,4 @@
-ARG NODE_VERSION='18.20.5'
+ARG NODE_VERSION='22.16.0'
 ARG PHP_VERSION='8.3'
 ARG BASE_IMAGE="serversideup/php:${PHP_VERSION}-cli-alpine"
 
