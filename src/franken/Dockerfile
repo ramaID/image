@@ -1,7 +1,7 @@
 ARG NODE_VERSION='22.16.0'
 # only support PHP > 8.2
 ARG PHP_VERSION='8.3'
-ARG BASE_IMAGE="dunglas/frankenphp:1.6.2-php${PHP_VERSION}-alpine"
+ARG BASE_IMAGE="dunglas/frankenphp:1-php${PHP_VERSION}-alpine"
 
 FROM node:${NODE_VERSION}-alpine AS node
 
