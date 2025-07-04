@@ -35,3 +35,9 @@ jobs:
       php-variation: franken
       checkout-type: branch
     secrets: inherit
+  filelens:
+    uses: ./.github/workflows/service_docker-build-and-publish-filelens.yml
+    with:
+      tag-prefix: "beta-"
+      checkout-type: branch
+    secrets: inherit
