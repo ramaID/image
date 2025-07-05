@@ -34,6 +34,11 @@ RUN mkdir -p /tmp/filelens /home/filelens/.cache /home/filelens/.config && \
 RUN mkdir -p /home/filelens/.config/libreoffice && \
     chown -R filelens:filelens /home/filelens/.config/libreoffice
 
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    poppler-utils \
+    && rm -rf /var/lib/apt/lists/*
+
 # Switch to non-root user
 USER filelens
 
