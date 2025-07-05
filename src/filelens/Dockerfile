@@ -10,7 +10,6 @@ RUN apt-get update && apt-get install -y \
     curl \
     ca-certificates \
     libssl3 \
-    poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
 # Fix ImageMagick security policy for PDF processing
@@ -34,6 +33,11 @@ RUN mkdir -p /tmp/filelens /home/filelens/.cache /home/filelens/.config && \
 # Set up LibreOffice user profile directory to avoid permission issues
 RUN mkdir -p /home/filelens/.config/libreoffice && \
     chown -R filelens:filelens /home/filelens/.config/libreoffice
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    poppler-utils \
+    && rm -rf /var/lib/apt/lists/*
 
 # Switch to non-root user
 USER filelens
