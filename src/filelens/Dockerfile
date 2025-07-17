@@ -45,6 +45,9 @@ RUN apt-get update && apt-get install -y \
     texlive-latex-recommended \
     texlive-fonts-recommended \
     texlive-latex-extra \
+    texlive-xetex \
+    texlive-base \
+    texlive-binaries \
     # Additional fonts for better rendering
     fonts-liberation \
     fonts-dejavu \
@@ -87,6 +90,7 @@ RUN libreoffice --version && \
     unoconv --version && \
     pdfinfo -v && \
     curl --version && \
+    xelatex --version && \
     (wkhtmltopdf --version || echo "wkhtmltopdf not available - Pandoc will use fallback engine")
 
 # Create a non-root user with home directory (if not exists)
