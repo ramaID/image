@@ -15,7 +15,7 @@ ENV SERVER_NAME="http://"
 
 RUN apk update && \
     apk add --no-cache git unzip bash && \
-    install-php-extensions gd pcntl opcache pdo pdo_mysql pdo_pgsql mongodb redis zip
+    install-php-extensions gd pcntl opcache pdo pdo_mysql pdo_pgsql mongodb redis zip bcmath exif
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
